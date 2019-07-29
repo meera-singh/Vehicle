@@ -1,0 +1,20 @@
+.pageheader{
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px 0px;
+    position: static;
+    top: 50px;
+    bottom: 0px;
+    left: 0px;
+    right: 20px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 40px;
+    user-select: none;
+    padding: 25px;
+    background-image: linear-gradient(to right,#243c80, red);
+    border-radius: 15px; 
+}
+.pageheader h2{
+    color: white;
+}

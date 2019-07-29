@@ -1,0 +1,99 @@
+<div class="pageheader">
+  <h2>
+    <i class="fa fa-user" style="color:white"></i> NIEUWE AGENDA </h2>
+  <div class="breadcrumb-wrapper">
+    <span class="label" style="color:red; top: 20 px; margin-top: 55px; font-style: normal;">You are here </span>/
+    <ol class="breadcrumb">
+      <li class="active" style="color: red; top: 20 px; margin-top: 55px;">NIEUWE AGENDA</li>
+    </ol>
+  </div>
+</div>
+<div class="contentpanel" style="background:url(https://resources-live.sketch.cloud/files/d5b4a8ab-3624-4895-bb09-290ba7858d1c.png?Expires=1564275600&Signature=lkKjKzn6jKacy2L3VEY4tvEXIk4sAbsPmDBrEFCBTy9BZdJeKino8opFnHC20b4L3rAPtuGeqSioptBTw3x3FrNAJoIJv7N4geYY-IyC5Fa8wldBoK6VhzItyWNwM5reIml41Xe5iYp20XCqWNluwHOUbpbU4E5VHXoCpkVxNtQ_&Key-Pair-Id=APKAJOITMW3RWOLNNPYA); background-size: 100% 75% ;" >
+
+  <div class="row">
+    <div class="col-sm-9 col-md-9">
+      <form action="" autocomplete="off" [formGroup]="agendaForm">
+      <div class="sn_form_container">
+        <div class="sn_formsection sn_add_agendaform">
+          <h3 class="sn_sechdn" >Nieuwe Agenda Toevoegen</h3>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+              <div class="form-group">
+                <label for="name" class="label-control" style="color: #243c80">Afspraak Soort</label>
+                <select name="" id="input" class="form-control" required="required" formControlName="type">
+                  <option value="Select Agenda Type" disabled selected>Kies Agenda soort</option>
+                  <option value="Meeting">Vergadering</option>
+                  <option value="Driving">Rijles</option>
+                  <option value="Trial">Proefles</option>
+                  <option value="Student">Overig</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+              <div class="form-group">
+                <label for="phone" class="label-control" style="color: #243c80">Begin Datum & Tijd</label>
+                <input type="datetime-local" name="DatePicker" class="form-control" aria-required="true" aria-invalid="false"
+                       placeholder="Agenda Date & Time" data-validation="required" formControlName="startDate">
+
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+              <div class="form-group">
+                <label for="phone" class="label-control" style="color: #243c80">Eind Datum & Tijd</label>
+                <input type="datetime-local" name="DatePicker" value="" size="40" class="form-control" id="datetimepicker" aria-required="true" aria-invalid="false"
+                       placeholder="Agenda Date & Time" data-validation="required" formControlName="endDate">
+
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+              <div class="form-group">
+                <label for="name" class="label-control" style="color: #243c80">Kies Leerling</label>
+                <select name="" id="input" class="form-control" required="required" formControlName="studentId">
+                  <option value="Select Agenda Type" disabled selected>Select Student</option>
+                  <option value="{{studentObj.id}}" *ngFor="let studentObj of studentArr">{{studentObj?.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+              <div class="form-group">
+                <label for="name" class="label-control" style="color: #243c80">Kies Instructeur</label>
+                <select name="" id="input" class="form-control" required="required" formControlName="instructorId">
+                  <option value="Select Agenda Type" disabled selected>Select Instructor</option>
+                    <option value="{{instructor.id}}" *ngFor="let instructor of instructorArr">{{instructor?.name}}</option>
+
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+              <div class="form-group">
+                <label for="venue" class="label-control" style="color: #243c80">Ophaaladres</label>
+                <input type="text" id="streetname" class="form-control" placeholder="Street Name/No." formControlName="venue"><br>
+              </div>
+            </div>
+      
+            <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="form-group">
+                <label for="description" class="label-control" style="color: #243c80">Agenda Gegevens</label>
+                <textarea name="" id="description" class="form-control" rows="6" placeholder="Write Description Here" formControlName="description"></textarea><br>
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+            <div class="text-right">
+              <button type="submit" class="btn btn_grey btn_med" style="border-radius:12px ">RESET</button>
+              <button type="submit" class="btn btn_red btn_med" (click)="onSubmit()" style="border-radius:12px ">TOEVOEGEN</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>
+
+      <!-- sn_insList -->
+
+  </div>
+</div>
+<!-- contentpanel -->

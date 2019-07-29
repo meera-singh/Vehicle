@@ -1,0 +1,81 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.5)" size="large" color="#ad1f27" type="ball-scale-multiple"></ngx-spinner>
+<div class="pageheader">
+  <h2>
+    <i class="fa fa-car" style="color: white;"></i>VOERTUIG {{isEdit ? 'BEWERKEN' : 'TOEVOEGEN'}} </h2>
+  <div [routerLink]="['/admin/vehicle-list']" class="breadcrumb-wrapper btn_wrap" style="top: 20 px; margin-top: 55px;">
+    <a class="btn btn_red tophdr_btn" style="top: 15px; color:whitesmoke;">
+      <i class="fa fa-long-arrow-left" aria-hidden="true" style= "color:white;" ></i> TERUG</a>
+  </div>
+</div>
+<div class="contentpanel" style="background:url(https://resources-live.sketch.cloud/files/d5b4a8ab-3624-4895-bb09-290ba7858d1c.png?Expires=1564275600&Signature=lkKjKzn6jKacy2L3VEY4tvEXIk4sAbsPmDBrEFCBTy9BZdJeKino8opFnHC20b4L3rAPtuGeqSioptBTw3x3FrNAJoIJv7N4geYY-IyC5Fa8wldBoK6VhzItyWNwM5reIml41Xe5iYp20XCqWNluwHOUbpbU4E5VHXoCpkVxNtQ_&Key-Pair-Id=APKAJOITMW3RWOLNNPYA); background-size: 100% 75% ;" >
+
+  <div class="row">
+    <div class="col-sm-9 col-md-9">
+      <div class="sn_form_container">
+        <form action="" autocomplete="off" [formGroup]="vehicleForm">
+          <div class="sn_formsection sn_add_agendaform">
+            <h3 class="sn_sechdn">Voertuig Gegevens</h3>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="form-group" [ngClass]="displayFieldCss('numberPlate')">
+                  <label for="numberPlate" class="label-control" style="color: #243c80">Kenteken</label>
+                  <input type="text" id="numberPlate" class="form-control required" placeholder="Vehicle Number" formControlName="numberPlate">
+                  <app-form-fields-helper [displayError]="isFieldValid('numberPlate')" errorMsg="Please enter valid vehicle number">
+                  </app-form-fields-helper>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="form-group" [ngClass]="displayFieldCss('categoryType')">
+                  <label for="categoryType" class="label-control required" style="color: #243c80">Categorie</label>
+                  <select name="" id="categoryType" class="form-control" required="required" formControlName="categoryType">
+                    <option value="Select Agenda Type" disabled selected>Select Category</option>
+                    <option value="{{category.id}}" *ngFor="let category of vehicleCategory">{{category?.name}}</option>
+
+                  </select>
+
+
+                  <app-form-fields-helper [displayError]="isFieldValid('categoryType')" errorMsg="Please enter valid category">
+                  </app-form-fields-helper>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="form-group">
+                  <label for="phone" class="label-control" style="color: #243c80">Laatste Inspectie
+                    <span class="text-danger small">(Optional)</span>
+                  </label>
+                  <input type="date" name="DatePicker" value="" size="40" class="form-control" id="datetimepicker" aria-required="true" aria-invalid="false"
+                    placeholder="" data-validation="required" formControlName="lastInspectionDate">
+
+
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="form-group">
+                  <label for="kms" class="label-control" style="color: #243c80">KMS.</label>
+                  <input type="text" id="kms" class="form-control" placeholder="KMS Travelled" formControlName="kms">
+                </div>
+              </div>
+
+
+
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn_red btn_med" (click)="onSubmit()" *ngIf="!isEdit" style="border-radius:12px " >
+              BEVESTIGEN
+            </button>
+            <button type="submit" class="btn btn_red btn_med" (click)="onEdit()" *ngIf="isEdit" style="border-radius:12px " >
+              BEWERKEN
+            </button>
+            <button type="submit" class="btn btn_grey btn_med" (click)="resetForm()" style="border-radius:12px " >RESET</button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!-- contentpanel -->

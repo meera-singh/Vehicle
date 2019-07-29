@@ -1,0 +1,185 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.5)" size="large" color="#ad1f27" type="ball-scale-multiple"></ngx-spinner>
+<div class="pageheader">
+  <h2>
+    <i class="fa fa-user " style="color: white;"></i>LEERLING {{isEdit ? 'BEWERKEN' : 'TOEVOEGEN'}}</h2>
+  <div class="breadcrumb-wrapper btn_wrap">
+    <a [routerLink]="['/admin/student-list']" class="btn btn_red tophdr_btn" style="top: 20 px; margin-top: 55px;">
+      <i class="fa fa-long-arrow-left" aria-hidden="true" ></i> TERUG</a>
+  </div>
+</div>
+
+<div class="contentpanel" style="background:url(https://resources-live.sketch.cloud/files/d5b4a8ab-3624-4895-bb09-290ba7858d1c.png?Expires=1564275600&Signature=lkKjKzn6jKacy2L3VEY4tvEXIk4sAbsPmDBrEFCBTy9BZdJeKino8opFnHC20b4L3rAPtuGeqSioptBTw3x3FrNAJoIJv7N4geYY-IyC5Fa8wldBoK6VhzItyWNwM5reIml41Xe5iYp20XCqWNluwHOUbpbU4E5VHXoCpkVxNtQ_&Key-Pair-Id=APKAJOITMW3RWOLNNPYA); background-size: 100% 75% ;"> 
+
+  <div class="sn_form_container">
+    <form action="" autocomplete="off" [formGroup]="studentForm">
+      <div class="sn_formsection">
+        <h3 class="sn_sechdn" >Persoonlijk Gegevens</h3>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group" [ngClass]="displayFieldCss('name')">
+              <label for="name" class="label-control required" style="color: #243c80">Naam</label>
+              <input type="text" id="name" class="form-control" placeholder="Student's Name" formControlName="name">
+              <app-form-fields-helper [displayError]="isFieldValid('name')" errorMsg="Please enter valid name">
+              </app-form-fields-helper>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group" [ngClass]="displayFieldCss('email')">
+              <label for="email" class="label-control required" style="color: #243c80">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="Student's Email" formControlName="email">
+              <app-form-fields-helper [displayError]="isFieldValid('email')" errorMsg="Please enter valid email">
+              </app-form-fields-helper>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group" [ngClass]="displayFieldCss('phone')">
+              <label for="phone" class="label-control required" style="color: #243c80">Phone</label>
+              <input type="text" id="phone" class="form-control" placeholder="Student's Phone No." formControlName="phone">
+              <app-form-fields-helper [displayError]="isFieldValid('phone')" errorMsg="Please enter valid phone">
+              </app-form-fields-helper>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group" [ngClass]="displayFieldCss('referredBy')">
+              <label for="referredBy" class="label-control" style="color: #243c80">Referred By</label>
+              <input type="text" id="referredBy" class="form-control" placeholder="Referred By" formControlName="referredBy">
+              <app-form-fields-helper [displayError]="isFieldValid('referredBy')" errorMsg="Please enter valid school name">
+              </app-form-fields-helper>
+            </div>
+          </div>
+        </div>
+        <div class="sn_formsection" formGroupName="address">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="streetname" class="label-control" style="color: #243c80">Straat</label>
+              <input type="text" id="streetname" class="form-control" placeholder="Street Name/No." formControlName="street">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="houseno" class="label-control" style="color: #243c80">Huisnummer</label>
+              <input type="text" id="houseno" class="form-control" placeholder="House No." formControlName="houseNumber">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="postalcode" class="label-control" style="color: #243c80">PostCode</label>
+              <input type="text" id="postalcode" class="form-control" placeholder="Postal Code" formControlName="postalCode">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="city" class="label-control" style="color: #243c80">Plaats</label>
+              <input type="text" id="city" class="form-control" placeholder="City" formControlName="city">
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+      <!-- sn_formsection -->
+
+      <div class="sn_formsection">
+        <h3 class="sn_sechdn" >Registratie Gegevens</h3>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="package" class="label-control" style="color: #243c80">Pakket</label>
+              <select class="form-control" id="package" data-placeholder="Choose a Package..." formControlName="packageId">
+                <option value="" disabled selected>Select Package</option>
+                <option value="{{package.id}}" *ngFor="let package of packageArr">{{package?.name}}</option>
+
+              </select>
+
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="instructor" class="label-control" style="color: #243c80">Instructeur</label>
+              <select class="form-control" id="instructor"  data-placeholder="Choose a Instructor..." formControlName="instructorId">
+                <option value="" disabled selected>Select Instructor</option>
+                <option value="{{instructor.id}}" *ngFor="let instructor of instructorArr" [selected]="instructor.id === instructorId">{{instructor?.name}}</option>
+
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="phone" class="label-control" style="color: #243c80">Tijd voorkeur &amp; Time</label>
+              <input type="text" name="DatePicker" value="" size="40" class="form-control" id="datetimepicker" aria-required="true" aria-invalid="false">
+
+            </div>
+          </div>
+
+
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="status" class="label-control" style="color: #243c80">Status</label>
+              <div class="status_option">
+                <span class="rdio rdio-success">
+                  <input type="radio" name="status" value="1" id="radioSuccess1" checked="" formControlName="status">
+                  <label for="radioSuccess1">Actief</label>
+                </span>
+
+                <span class="rdio rdio-danger">
+                  <input type="radio" name="status" value="2" id="radioDanger1" formControlName="status">
+                  <label for="radioDanger1">Inactief</label>
+                </span>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- sn_formsection -->
+      <div class="sn_formsection">
+        <h3 class="sn_sechdn">Betaal Gegevens</h3>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="bankname" class="label-control" style="color: #243c80">Bank Naam</label>
+              <input type="text" id="bankname" class="form-control" placeholder="Enter Bank Name">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="accountno" class="label-control" style="color: #243c80">RekeningNummer</label>
+              <input type="text" id="accountno" class="form-control" placeholder="Enter Account No.">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="form-group">
+              <label for="status" class="label-control" style="color: #243c80">Nota Status</label>
+              <div class="status_option">
+                <span class="rdio rdio-success">
+                  <input type="radio" name="invoice" value="4" id="radioSuccess" checked="">
+                  <label for="radioSuccess">Compleet</label>
+                </span>
+
+                <span class="rdio rdio-danger">
+                  <input type="radio" name="invoice" value="5" id="radioDanger">
+                  <label for="radioDanger">Pending</label>
+                </span>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- sn_formsection -->
+      <button type="submit" class="btn btn_red btn_med" (click)="onSubmit()" *ngIf="!isEdit" style="border-radius:12px ">
+        BEVESTIGEN
+      </button>
+      <button type="submit" class="btn btn_red btn_med" (click)="onEdit()" *ngIf="isEdit" style="border-radius:12px ">
+        BEWERKEN
+      </button>
+
+      <button type="submit" class="btn btn_grey btn_med" (click)="resetForm()" style="border-radius:12px ">RESET</button>
+    </form>
+  </div>
+
+</div>
+<!-- contentpanel -->
